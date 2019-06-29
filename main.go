@@ -21,8 +21,7 @@ func main() {
 
 	// Routes
 	e.GET("/", hello)
-	e.PUT("/led/:id", led.TurnOn)
-	e.DELETE("/led/:id", led.TurnOff)
+	e.PUT("/led/:id", led.Turn)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))

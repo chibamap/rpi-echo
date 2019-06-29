@@ -32,19 +32,17 @@ func New() *Led {
 	return led
 }
 
-func (self *Led) TurnOn(c echo.Context) error {
+func (self *Led) Turn(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		panic(fmt.Sprint("unable to refer id", err.Error()))
 	}
-	pin := self.Pins[id].High()
+	pin := self.Pins[id]
+	pin.Toggle()
 
-	return c.String(http.StatusOK, fmt.Sprintf("turned on led %s", id))
+	return c.String(http.StatusOK, fmt.Sprintf("toggle led %s", id))
 }
 
-func (self *Led) TurnOff(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
-}
 func (self *Led) Close() {
 	rpio.Close()
 }
